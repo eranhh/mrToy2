@@ -1,6 +1,6 @@
 import { Home } from './pages/Home.jsx'
 import { ToyApp } from './pages/ToyApp.jsx'
-import { ToyDetails } from './cmps/ToyDetails.jsx'
+import { ToyDetails } from './pages/ToyDetails.jsx'
 import { ToyUpdate } from './pages/ToyUpdate.jsx'
 import { About } from './pages/About.jsx'
 

@@ -1,6 +1,7 @@
 import { addToy, updateToy } from '../store/actions/toyActions.js'
 import { Component } from 'react'
 import { connect } from 'react-redux'
+import { TextField } from '@material-ui/core'
 
 class _ToyUpdate extends Component {
 
@@ -55,13 +56,11 @@ class _ToyUpdate extends Component {
         const { toy } = this.state
         if (!toy) return <div className="loader"></div>
         return (
-            <div>
-                <h1>{toy._id ? 'Update' : 'Add'} Toy:</h1>
-                <form onSubmit={this.onSaveToy}>
-                    <label>Name</label>
-                    <input autoFocus type="text" value={toy.name} onChange={this.handleInput} name="name" />
-                    <label>Price</label>
-                    <input type="number" value={toy.price} onChange={this.handleInput} name="price" />
+            <div className="toy-update">
+                <h3>{toy._id ? 'Update' : 'Add'} Toy</h3>
+                <form className="flex col j-between" onSubmit={this.onSaveToy}>
+                    <TextField id="standard-secondary" label="Name" type="text" placeholder={toy.name} color="secondary" onChange={this.handleInput} />
+                    <TextField label="Price" type="number" value={toy.price} onChange={this.handleInput} name="price" />
                     <select onChange={this.handleInput} name="type" value={this.state.toy.type}>
                         <option value="educational">Educational</option>
                         <option value="funny">Funny</option>

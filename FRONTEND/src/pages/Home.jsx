@@ -4,8 +4,8 @@ import { LoginSignup } from '../cmps/LoginSignup.jsx'
 export class Home extends Component {
 
   render() {
-    return <div>HOME
+    return <section className="home main-layout">HOME
 <LoginSignup />
-    </div>
+    </section>
   }
 }

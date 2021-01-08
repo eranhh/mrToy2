@@ -1,8 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import {loadToys} from '../store/actions/toyActions';
-
-
+import { loadToys } from '../store/actions/toyActions';
 
 export class _ToyFilter extends Component {
 

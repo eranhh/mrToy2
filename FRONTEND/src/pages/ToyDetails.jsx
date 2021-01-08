@@ -24,10 +24,10 @@ class _ToyDetails extends Component {
         const { toy } = this.state
         if (!toy) return <div className="loader"></div>
         return (
-            <div className="toy-details flex col j-center">
+            <div className="toy-details flex col j-evenly">
                 <h1>{toy.name}</h1>
                 <h2>${toy.price}</h2>
-                <h3>Toy type: {toy.type}</h3>
+                <h3>Category: {toy.type}</h3>
                 <h4>{toy.inStock}</h4>
                 <p className="muted">Created at {new Date(toy.createdAt).toLocaleTimeString("en-US")}
                     &nbsp;{new Date(toy.createdAt).toLocaleDateString("en-US")}</p>
