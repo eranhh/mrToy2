@@ -1,0 +1,14 @@
+.toy-preview {
+    background-color: #5DADE2;
+    border-radius: 4px;
+    min-height: 300px;
+    text-align: center;
+}
+
+.toy-preview * {
+    padding: 15px;
+}
+
+.toy-preview h2 {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}

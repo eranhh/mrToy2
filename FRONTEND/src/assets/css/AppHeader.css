@@ -1,0 +1,17 @@
+header {
+    background-color: rgb(236, 135, 76);
+    color: rgb(16, 107, 149);
+    padding: 40px;
+    z-index: 1;
+    /* position: fixed; */
+    width: 100%;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+header a:hover, header link:hover {
+    color: #5DADE2;
+}
+
+header nav * {
+    margin-inline-start: 30px;
+}
