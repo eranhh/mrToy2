@@ -5,6 +5,7 @@
 body {
     font-family: sans-serif;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 button {
@@ -20,12 +21,17 @@ input {
     caret-color: red;
 }
 
-a, link {
+a,
+link {
     color: inherit;
     text-decoration: none;
+
+    display: inline-block;
+    width: 100%;
 }
 
-input, select {
+input,
+select {
     caret-color: red;
     border: 2px solid #bbbbbb;
     border-radius: 2px;

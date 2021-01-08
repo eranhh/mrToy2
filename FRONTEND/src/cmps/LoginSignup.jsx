@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import { userService } from '../services/userService.js'
 import { TextField } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 
 export class LoginSignup extends Component {
 
@@ -74,7 +75,6 @@ export class LoginSignup extends Component {
             loggedInUser: user
           })
       })
-
   }
 
   doLogout = () => {
@@ -115,7 +115,7 @@ export class LoginSignup extends Component {
           label="Username"
         />
         <br />
-        <button>Signup</button>
+        <Button type="submit" color="secondary">Signup</Button>
       </form>
     )
     let loginSection = (
@@ -137,7 +137,7 @@ export class LoginSignup extends Component {
           label="Password"
         />
         <br />
-        <button>Login</button>
+        <Button type="submit" color="secondary">Login</Button>
       </form>
     )
 
@@ -149,7 +149,7 @@ export class LoginSignup extends Component {
           <div>
             <h3>
               Welcome {loggedInUser.fullname}
-              <button onClick={this.doLogout}>Logout</button>
+              <Button color="secondary" onClick={this.doLogout}>Logout</Button>
             </h3>
           </div>
         )}

@@ -2,6 +2,7 @@ import { addToy, updateToy } from '../store/actions/toyActions.js'
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { TextField } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 
 class _ToyUpdate extends Component {
 
@@ -66,9 +67,11 @@ class _ToyUpdate extends Component {
                         <option value="funny">Funny</option>
                         <option value="adult">Adult</option>
                     </select>
-                    <label>in Stock</label>
-                    <input type="checkbox" checked={toy.inStock} onChange={this.handleInput} name="inStock" />
-                    <button>Save</button>
+                    <div className="flex a-center">
+                        <input type="checkbox" checked={toy.inStock} onChange={this.handleInput} name="inStock" />
+                        <label>in Stock</label>
+                    </div>
+                    <Button color='secondary'>Save</Button>
                 </form>
             </div>
         )
