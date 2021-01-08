@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { userService } from '../services/userService.js'
+import { TextField } from '@material-ui/core'
 
 export class LoginSignup extends Component {
 
@@ -90,28 +91,28 @@ export class LoginSignup extends Component {
     let signupSection = (
       <form className="frm" onSubmit={this.doSignup}>
         <h2>Signup</h2>
-        <input
+        <TextField
           type="text"
           name="fullname"
           value={this.state.signupCred.fullname}
           onChange={this.signupHandleChange}
-          placeholder="Full name"
+          label="Full name"
         />
         <br />
-        <input
+        <TextField
           name="password"
           type="password"
           value={this.state.signupCred.password}
           onChange={this.signupHandleChange}
-          placeholder="Password"
+          label="Password"
         />
         <br />
-        <input
+        <TextField
           type="text"
           name="username"
           value={this.state.signupCred.username}
           onChange={this.signupHandleChange}
-          placeholder="Username"
+          label="Username"
         />
         <br />
         <button>Signup</button>
@@ -120,20 +121,20 @@ export class LoginSignup extends Component {
     let loginSection = (
       <form className="frm" onSubmit={this.doLogin}>
         <h2>Login</h2>
-        <input
+        <TextField
           type="text"
           name="username"
           value={this.state.loginCred.username}
           onChange={this.loginHandleChange}
-          placeholder="Username"
+          label="Username"
         />
         <br />
-        <input
+        <TextField
           type="password"
           name="password"
           value={this.state.loginCred.password}
           onChange={this.loginHandleChange}
-          placeholder="Password"
+          label="Password"
         />
         <br />
         <button>Login</button>
@@ -143,9 +144,6 @@ export class LoginSignup extends Component {
 
     return (
       <div className="login">
-        <h1>
-          Login / Signup
-        </h1>
         <p>{this.state.msg}</p>
         {loggedInUser && (
           <div>

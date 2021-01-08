@@ -1,8 +1,18 @@
 .toy-details {
     background-color: powderblue;
     width: 500px;
-    height: 300px;
+    min-height: 500px;
     text-align: center;
     margin: 50px auto;
     border-radius: 5px;
+
+    img {
+        width: 200px;
+        height: 200px;
+        margin: auto;
+    }
+
+    .edit-btn {
+        min-height: 75px;
+    }
 }
