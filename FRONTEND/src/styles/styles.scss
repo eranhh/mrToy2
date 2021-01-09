@@ -1,6 +1,20 @@
-.success {
-    color: green;
-}
-.success-dark {
-    color: darken(green, 10%);
-}
+@import "./basics/base";
+@import "./basics/function";
+@import "./basics/functions";
+@import "./basics/helpers";
+@import "./basics/layout";
+@import "./basics/mixins";
+@import "./basics/typography";
+@import "./basics/variables";
+
+@import "./cmps/AppHeader";
+@import "./cmps/ToyFilter";
+@import "./cmps/ToyList";
+@import "./cmps/ToyPreview";
+
+@import "./pages/Home";
+@import "./pages/About";
+@import "./pages/ToyApp";
+@import "./pages/ToyDetails";
+@import "./pages/ToyUpdate";
+@import "./pages/LoginSignup";

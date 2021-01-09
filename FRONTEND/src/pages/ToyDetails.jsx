@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Button } from '@material-ui/core'
 
 class _ToyDetails extends Component {
 
@@ -24,15 +25,19 @@ class _ToyDetails extends Component {
         const { toy } = this.state
         if (!toy) return <div className="loader"></div>
         return (
-            <div className="toy-details flex col j-center">
+            <article className="toy-details flex col j-between">
                 <h1>{toy.name}</h1>
                 <h2>${toy.price}</h2>
-                <h3>Toy type: {toy.type}</h3>
+                <h3>Category: {toy.type}</h3>
                 <h4>{toy.inStock}</h4>
+                <img src={toy.inStock ? '../assets/img/inStock.png' : ''} />
+                <img src={`https://robohash.org/${toy.name}?set=set4`} alt="" />
                 <p className="muted">Created at {new Date(toy.createdAt).toLocaleTimeString("en-US")}
                     &nbsp;{new Date(toy.createdAt).toLocaleDateString("en-US")}</p>
-                <Link to={`/toy/update/${toy._id}`}>Edit</Link>
-            </div>
+                <Button color='secondary' className="edit-btn">
+                    <Link to={`/toy/update/${toy._id}`}>Edit</Link>
+                </Button>
+            </article>
         )
     }
 }

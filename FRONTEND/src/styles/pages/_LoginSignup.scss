@@ -1,0 +1,41 @@
+.login-signup {
+    width: 400px;
+    margin: auto;
+    margin-top: 75px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    min-height: 55vh;
+
+    .login-btn,
+    .signup-btn {
+        padding: 5px;
+    }
+
+    form {
+        // width: 80%;
+        // margin: auto;
+        padding: 25px 20%;
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .MuiInput-root {
+            font-size: 0.8em;
+        }
+        .MuiInput-root:last-of-type {
+            margin-bottom: 15px;
+        }
+        &.frm-signup {
+        }
+    }
+
+    .btn-group {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+        * {
+            padding: 10px;
+        }
+        button {
+            flex-grow: 1;
+        }
+    }
+}

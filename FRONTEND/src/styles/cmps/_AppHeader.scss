@@ -1,0 +1,27 @@
+header {
+    background-color: rgba(236, 135, 76, 0.3);
+    color: rgb(16, 107, 149);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+    padding: 35px;
+    z-index: 1;
+    /* position: fixed; */
+    width: 100%;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+
+    .link {
+        width: min-content;
+    }
+
+    .MuiChip-root {
+        cursor: pointer;
+
+        &:hover {
+            background-color: lightgray;
+            color: black;
+
+            // &:after{
+            //     content: "Logout";
+            // }
+        }
+    }
+}

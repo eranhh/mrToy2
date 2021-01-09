@@ -1,8 +1,9 @@
 import { Home } from './pages/Home.jsx'
 import { ToyApp } from './pages/ToyApp.jsx'
-import { ToyDetails } from './cmps/ToyDetails.jsx'
+import { ToyDetails } from './pages/ToyDetails.jsx'
 import { ToyUpdate } from './pages/ToyUpdate.jsx'
 import { About } from './pages/About.jsx'
+import { LoginSignup } from './pages/LoginSignup.jsx'
 
 export const routes = [
     {
@@ -20,6 +21,14 @@ export const routes = [
     {
         path: '/toy/:toyId',
         component: ToyDetails,
+    },
+    {
+        path: '/login',
+        component: LoginSignup,
+    },
+    {
+        path: '/signup',
+        component: LoginSignup,
     },
     {
         path: '/about',

@@ -9,15 +9,8 @@ export const toyService = {
     removeToy
 }
 
-function query(filterBy) {
-    if(!filterBy){
-        filterBy= {
-            name: '',
-            inStock: true,
-            type: ''
-        }
-    }
-    return axios.get(URL, {params: filterBy}).then(res => res.data)
+function query(filterBy  = {}) {
+    return axios.get(URL, {params: filterBy}).then(res => { return res.data })
 }
 
 function getToyById(toyId) {

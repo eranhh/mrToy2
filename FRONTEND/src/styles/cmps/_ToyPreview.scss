@@ -1,0 +1,27 @@
+.toy-preview {
+    background-color: #4b9cd3;
+    border-radius: 4px;
+    min-height: 300px;
+    font-weight: bolder;
+
+    .title-container {
+        background-color: rgba(80, 80, 80, 0.9);
+        color: white;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    *:not(.title-container) {
+        padding: 15px;
+    }
+
+    img {
+        width: 200px;
+        height: 200px;
+        margin: auto;
+    }
+
+    .details-btn {
+        max-height: 75px;
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}

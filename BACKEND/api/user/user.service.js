@@ -1,4 +1,3 @@
-
 const dbService = require('../../services/db.service')
 // const logger = require('../../services/logger.service')
 const reviewService = require('../review/review.service')
@@ -20,7 +19,7 @@ async function query(filterBy = {}) {
         var users = await collection.find(criteria).toArray()
         users = users.map(user => {
             delete user.password
-            user.isHappy = true
+            user.isAdmin = false
             user.createdAt = ObjectId(user._id).getTimestamp()
             // Returning fake fresh data
             // user.createdAt = Date.now() - (1000 * 60 * 60 * 24 * 3) // 3 days ago
@@ -51,6 +50,7 @@ async function getById(userId) {
         throw err
     }
 }
+
 async function getByUsername(username) {
     try {
         const collection = await dbService.getCollection('user')
@@ -78,7 +78,8 @@ async function update(user) {
         const userToSave = {
             _id: ObjectId(user._id),
             username: user.username,
-            fullname: user.fullname,
+            firstName: user.fisrtName,
+            lastName: user.lastName,
             score: user.score
         }
         const collection = await dbService.getCollection('user')
@@ -94,9 +95,11 @@ async function add(user) {
     try {
         // peek only updatable fields!
         const userToAdd = {
+            email: user.email,
             username: user.username,
             password: user.password,
-            fullname: user.fullname,
+            firstName: user.firstName,
+            lastName: user.lastName
         }
         const collection = await dbService.getCollection('user')
         await collection.insertOne(userToAdd)
@@ -125,5 +128,3 @@ function _buildCriteria(filterBy) {
     }
     return criteria
 }
-
-
