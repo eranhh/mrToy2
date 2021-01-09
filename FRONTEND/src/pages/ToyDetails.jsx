@@ -30,7 +30,7 @@ class _ToyDetails extends Component {
                 <h2>${toy.price}</h2>
                 <h3>Category: {toy.type}</h3>
                 <h4>{toy.inStock}</h4>
-                <img src={toy.inStock ? '../assets/img/inStock.png' : ''} />
+                <img  src={toy.inStock? '../assets/img/inStock.png':'' } alt="" />
                 <img src={`https://robohash.org/${toy.name}?set=set4`} alt="" />
                 <p className="muted">Created at {new Date(toy.createdAt).toLocaleTimeString("en-US")}
                     &nbsp;{new Date(toy.createdAt).toLocaleDateString("en-US")}</p>

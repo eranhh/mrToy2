@@ -1,6 +1,6 @@
 const initialState = {
     toys: [],
-    filterBy: { type: 'All', name: '' , inStock: true }
+    // filterBy: { type: 'All', name: '' , inStock: true }
 }
 
 export function toyReducer(state = initialState, action) {
@@ -17,10 +17,10 @@ export function toyReducer(state = initialState, action) {
                 ...state,
                 toys: [...state.toys, action.toy]
             }
-        // case 'FILTER_TODOS':
-        //     return { ...state, filterBy: action.filterBy }
         case 'REMOVE_TOY':
             return { ...state, toys: state.toys.filter(toy => toy._id !== action.toyId) }
+        // case 'FILTER_TOYS':
+        //     return { ...state, filterBy: action.filterBy }
         default:
             return state
     }

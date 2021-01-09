@@ -10,9 +10,13 @@ class _ToyApp extends Component {
     // state = {
     //     filterBy: 
     // }
-
+    
     componentDidMount() {
         this.props.loadToys()
+    }
+
+    onSetFilter = (filterBy) => {
+        this.props.loadToys(filterBy)
     }
 
     // onSetFilter = (filterBy) => {
@@ -47,9 +51,8 @@ class _ToyApp extends Component {
         // const toys = this.toysForDisplay
         return <section className="toy-app">
             <section>
-                <Link to="/toy/update">Add Toy</Link>
-                <ToyFilter/>
-                {/* <ToyFilter onSetFilter={this.onSetFilter} /> */}
+                <ToyFilter onSetFilter={this.onSetFilter} />
+                <Link className="add-btn" to="/toy/update">Add Toy</Link>
                 <ToyList toys={toys} onRemove={removeToy} />
             </section>
         </section>

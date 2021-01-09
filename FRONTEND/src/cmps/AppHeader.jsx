@@ -8,7 +8,7 @@ export function AppHeader() {
 
     return <header>
         <section className="main-layout flex j-between a-center">
-            <h1><Link to="/">MR TOY</Link></h1>
+            <h1><Link to="/">Kitty Toys</Link></h1>
             {currUser ?
                 <Link to="/login" className="link">
                     <Chip

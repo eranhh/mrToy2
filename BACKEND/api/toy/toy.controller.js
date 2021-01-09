@@ -4,14 +4,14 @@ const toyService = require('./toy.service')
 
 async function getToys(req, res) {
     try {
-        // const filterBy = {
-        //     name:req.query?.name||'',
-        //     type: req.query?.type||'',
-        //     inStock: req.query?.inStock||''
-        // }
-        // console.log('filterBy', filterBy)
-        const toys = await toyService.query(req.query)
-        // const toys = await toyService.query(filterBy)
+        const filterBy = {
+            name:req.query?.name||'',
+            type: req.query?.type||'',
+            inStock: req.query?.inStock||''
+        }
+        console.log('filterBy', filterBy)
+        // const toys = await toyService.query(req.query)
+        const toys = await toyService.query(filterBy)
         res.send(toys)
     } catch (err) {
         logger.error('Cannot get toys', err)

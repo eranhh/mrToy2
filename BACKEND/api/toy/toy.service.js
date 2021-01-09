@@ -3,8 +3,8 @@ const ObjectId = require('mongodb').ObjectId
 const asyncLocalStorage = require('../../services/als.service')
 
 async function query(filterBy = {}) {
-    const criteria = {}
-    // const criteria = _buildCriteria(filterBy)
+    // const criteria = {}
+    const criteria = _buildCriteria(filterBy)
     try {
         const collection = await dbService.getCollection('toy')
         var toys = await collection.find(criteria).toArray()
@@ -47,7 +47,8 @@ async function update(toy) {
             _id: ObjectId(toy._id),
             name: toy.name,
             type: toy.type,
-            price: +toy.price,
+            price: toy.price,
+            inStock: toy.inStock,
             createdAt: toy.createdAt
         }
         const collection = await dbService.getCollection('toy')
@@ -70,6 +71,7 @@ async function add(toy) {
             name: toy.name,
             type: toy.type,
             price: toy.price,
+            inStock: toy.inStock,
             createdAt: Date.now()
         }
         const collection = await dbService.getCollection('toy')
@@ -81,26 +83,28 @@ async function add(toy) {
     }
 }
 
-// function _buildCriteria(filterBy) {
-//     const criteria = {}
-//     if (filterBy.name) {
-//         const nameCriteria = {
-//             $regex: filterBy.name, $options: 'i'
-//         }
-//         criteria.name = nameCriteria
-//     }
-//     if (filterBy.type&&filterBy.type!=='All'){
-//         const typeCriteria = {
-//         $regex: filterBy.name, $options: 'i'}
-//         criteria.type = typeCriteria
-//     }
-//     if (filterBy.inStock) {
-//         filterBy.inStock=(filterBy.inStock==='true') 
-//         const inStockCriteria ={$ne:filterBy.inStock}
-//         criteria.type = inStockCriteria
-//     }
-// return criteria
-// }
+function _buildCriteria(filterBy) {
+    const criteria = {}
+    if (filterBy.name) {
+        const nameCriteria = {
+            $regex: filterBy.name, $options: 'i'
+        }
+        criteria.name = nameCriteria
+    }
+    if (filterBy.type && filterBy.type !== 'All') {
+        const typeCriteria = {
+            $regex: filterBy.type, $options: 'i'
+        }
+        criteria.type = typeCriteria
+    }
+    if (filterBy.inStock) {
+        filterBy.inStock = (filterBy.inStock === 'false')
+        const inStockCriteria = { $ne: filterBy.inStock }
+        criteria.inStock = inStockCriteria
+    }
+    console.log('criteria', criteria)
+    return criteria
+}
 
 module.exports = {
     query,

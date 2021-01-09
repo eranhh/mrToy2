@@ -44,6 +44,7 @@ class _ToyUpdate extends Component {
     onSaveToy = (ev) => {
         ev.preventDefault()
         const { toy } = this.state
+        console.log("blablabla", toy);
         // if (!toy.name) return
         if (toy._id) {
             this.props.updateToy(toy).then(() => this.props.history.push('/toy'))
@@ -60,9 +61,9 @@ class _ToyUpdate extends Component {
             <div className="toy-update">
                 <h3>{toy._id ? 'Update' : 'Add'} Toy</h3>
                 <form className="flex col j-between" onSubmit={this.onSaveToy}>
-                    <TextField id="standard-secondary" label="Name" type="text" placeholder={toy.name} color="secondary" onChange={this.handleInput} />
+                    <TextField id="standard-secondary" label="Name" type="text" name="name" value={toy.name} placeholder="Name" color="secondary" onChange={this.handleInput} />
                     <TextField label="Price" type="number" value={toy.price} onChange={this.handleInput} name="price" />
-                    <select onChange={this.handleInput} name="type" value={this.state.toy.type}>
+                    <select onChange={this.handleInput} name="type" value={toy.type}>
                         <option value="educational">Educational</option>
                         <option value="funny">Funny</option>
                         <option value="adult">Adult</option>
@@ -71,7 +72,7 @@ class _ToyUpdate extends Component {
                         <input type="checkbox" checked={toy.inStock} onChange={this.handleInput} name="inStock" />
                         <label>in Stock</label>
                     </div>
-                    <Button color='secondary'>Save</Button>
+                    <Button type="submit" color='secondary'>Save</Button>
                 </form>
             </div>
         )

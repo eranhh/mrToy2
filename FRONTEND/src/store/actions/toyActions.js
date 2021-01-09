@@ -39,16 +39,6 @@ export function updateToy(toy) {
     }
 }
 
-// export function setFilter(filterBy) {
-//     return (dispatch) => {
-//         const action = {
-//             type: 'FILTER_TODOS',
-//             filterBy
-//         }
-//         dispatch(action)
-//     }
-// }
-
 export function removeToy(toyId) {
     return (dispatch) => {
         return toyService.removeToy(toyId)
@@ -61,3 +51,13 @@ export function removeToy(toyId) {
             })
     }
 }
+
+// export function setFilter(filterBy) {
+//     return (dispatch) => {
+//         const action = {
+//             type: 'FILTER_TOYS',
+//             filterBy
+//         }
+//         dispatch(action)
+//     }
+// }
