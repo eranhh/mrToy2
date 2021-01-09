@@ -4,12 +4,24 @@ import { Button, ButtonGroup, Chip, Avatar } from '@material-ui/core'
 
 export function AppHeader() {
     const currUser = storageService.load('loggedinUser')
+    const fullName = currUser ? currUser.firstName + ' ' + currUser.lastName : null
 
     return <header>
         <section className="main-layout flex j-between a-center">
             <h1><Link to="/">MR TOY</Link></h1>
-                {currUser &&
-                    <Chip avatar={<Avatar>M</Avatar>} label={currUser.fullname} color="primary" />}
+            {currUser ?
+                <Link to="/login" className="link">
+                    <Chip
+                        avatar={<Avatar>{currUser.firstName.charAt(0) + currUser.lastName.charAt(0)}</Avatar>}
+                        label={fullName}
+                        color="primary" />
+                </Link>
+                : <Link to="/signup" className="link">
+                    <Chip
+                        avatar={<Avatar></Avatar>}
+                        label="Login"
+                        color="primary" />
+                </Link>}
             <nav>
                 <ButtonGroup variant="contained" color="secondary" aria-label="contained primary button group">
                     <Button><Link to="/toy">Toys</Link></Button>
