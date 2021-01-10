@@ -67,9 +67,9 @@ class _ToyUpdate extends Component {
                     <TextField id="standard-secondary" label="Name" type="text" name="name" value={toy.name} placeholder="Name" color="secondary" onChange={this.handleInput} />
                     <TextField label="Price" type="number" min="0" value={toy.price} onChange={this.handleInput} name="price" />
                     <select onChange={this.handleInput} name="type" value={toy.type}>
-                        <option value="educational">Educational</option>
-                        <option value="funny">Funny</option>
-                        <option value="adult">Adult</option>
+                        <option value="Educational">Educational</option>
+                        <option value="Funny">Funny</option>
+                        <option value="Adult">Adult</option>
                     </select>
                     <div className="flex a-center">
                         <input type="checkbox" checked={toy.inStock} onChange={this.handleInput} name="inStock" />
