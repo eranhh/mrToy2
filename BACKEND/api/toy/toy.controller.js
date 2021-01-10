@@ -22,6 +22,7 @@ async function getToys(req, res) {
 }
 
 async function deleteToy(req, res) {
+    const toyId = req.params.id
     try {
         await toyService.remove(toyId)
         res.send({ msg: 'Deleted successfully' })

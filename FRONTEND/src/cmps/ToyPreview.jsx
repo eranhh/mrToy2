@@ -6,14 +6,14 @@ function _ToyPreview({ loggedInUser, toy, onRemove }) {
     return <article className="toy-preview flex col">
         <div className="title-container flex j-between a-center">
             <h2>{toy.name}</h2>
-            {(loggedInUser && (loggedInUser.isAdmin || loggedInUser.username === toy.addedBy)) && <Button color='secondary' onClick={() => onRemove(toy._id)}>X</Button>}
+            {(loggedInUser && loggedInUser.isAdmin) && <Button color='secondary' onClick={() => onRemove(toy._id)}>X</Button>}
             {/* <Button color='secondary' onClick={() => onRemove(toy._id)}>X</Button> */}
         </div>
-        <h4 className="green">${toy.price}</h4>
+        <h4 className="lem-chif">${toy.price}</h4>
         <p>Category: {toy.type}</p>
         <img src={`https://robohash.org/${toy.name}?set=set4`} alt="" />
         <Button className="details-btn">
-            <Link to={`/toy/${toy._id}`}>Details</Link>
+            <Link to={`/toy/${toy._id}`} className="lem-chif">Details</Link>
         </Button>
     </article>
 }

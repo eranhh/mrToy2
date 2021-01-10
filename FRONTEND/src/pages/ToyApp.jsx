@@ -10,7 +10,7 @@ class _ToyApp extends Component {
     // state = {
     //     filterBy: 
     // }
-    
+
     componentDidMount() {
         this.props.loadToys()
     }
@@ -27,18 +27,18 @@ class _ToyApp extends Component {
     // get toysForDisplay() {
     //     let { toys } = this.props
     //     console.log(this.props)
-        // switch (this.props.filterBy.type) {
-        //     case 'done':
-        //         toys = toys.filter(toy => toy.isDone)
-        //         break;
-        //     case 'active':
-        //         toys = toys.filter(toy => !toy.isDone)
-        //         break;
-        // }
+    // switch (this.props.filterBy.type) {
+    //     case 'done':
+    //         toys = toys.filter(toy => toy.isDone)
+    //         break;
+    //     case 'active':
+    //         toys = toys.filter(toy => !toy.isDone)
+    //         break;
+    // }
 
-        // const regex = new RegExp(this.props.filterBy.text, 'i')
-        // toys = toys.filter(toy => regex.test(toy.text))
-        // return toys
+    // const regex = new RegExp(this.props.filterBy.text, 'i')
+    // toys = toys.filter(toy => regex.test(toy.text))
+    // return toys
 
     //     const { filterBy } = this.props;
     //     return toys.filter(toy => {
@@ -47,12 +47,12 @@ class _ToyApp extends Component {
     // }
 
     render() {
-        const { toys, removeToy } = this.props
+        const { toys, loggedInUser, removeToy } = this.props
         // const toys = this.toysForDisplay
         return <section className="toy-app">
             <section>
                 <ToyFilter onSetFilter={this.onSetFilter} />
-                <Link className="add-btn" to="/toy/update">Add Toy</Link>
+                {(loggedInUser && loggedInUser.isAdmin) && <Link className="add-btn" to="/toy/update">Add Toy</Link>}
                 <ToyList toys={toys} onRemove={removeToy} />
             </section>
         </section>
@@ -62,7 +62,8 @@ class _ToyApp extends Component {
 const mapStateToProps = (state) => {
     return {
         toys: state.toyModule.toys,
-        filterBy: state.toyModule.filterBy
+        filterBy: state.toyModule.filterBy,
+        loggedInUser: state.userModule.loggedInUser
     }
 }
 

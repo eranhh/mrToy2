@@ -4,9 +4,6 @@ const axios = Axios.create({
 })
 
 const URL = `http://localhost:3030/api/toy`
-const axios = Axios.create({
-    withCredentials: true
-})
 
 export const toyService = {
     query,

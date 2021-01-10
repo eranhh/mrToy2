@@ -23,6 +23,7 @@ class _ToyDetails extends Component {
 
     render() {
         const { toy } = this.state
+        const { loggedInUser } = this.props
         if (!toy) return <div className="loader"></div>
         return (
             <article className="toy-details flex col j-between">
@@ -30,13 +31,13 @@ class _ToyDetails extends Component {
                 <h2>${toy.price}</h2>
                 <h3>Category: {toy.type}</h3>
                 <h4>{toy.inStock}</h4>
-                <img  src={toy.inStock? '../assets/img/inStock.png':'' } alt="" />
+                <img src={toy.inStock ? '../assets/img/inStock.png' : ''} alt="" />
                 <img src={`https://robohash.org/${toy.name}?set=set4`} alt="" />
                 <p className="muted">Created at {new Date(toy.createdAt).toLocaleTimeString("en-US")}
                     &nbsp;{new Date(toy.createdAt).toLocaleDateString("en-US")}</p>
-                <Button color='secondary' className="edit-btn">
+                {(loggedInUser && loggedInUser.isAdmin) && <Button color='secondary' className="edit-btn">
                     <Link to={`/toy/update/${toy._id}`}>Edit</Link>
-                </Button>
+                </Button>}
             </article>
         )
     }
@@ -44,7 +45,8 @@ class _ToyDetails extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        toys: state.toyModule.toys
+        toys: state.toyModule.toys,
+        loggedInUser: state.userModule.loggedInUser
     }
 }
 
