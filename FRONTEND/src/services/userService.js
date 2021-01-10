@@ -1,5 +1,8 @@
 import { storageService } from './storageService.js'
-import axios from 'axios'
+import Axios from 'axios';
+const axios = Axios.create({
+    withCredentials: true
+})
 
 const URL = 'http://localhost:3030/api/auth';
 const STORAGE_KEY = 'loggedinUser'

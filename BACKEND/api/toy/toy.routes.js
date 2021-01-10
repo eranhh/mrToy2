@@ -8,8 +8,8 @@ const router = express.Router()
 // router.use(requireAuth)
 
 router.get('/',log, getToys)
-router.post('/', addToy)
-router.delete('/:id', deleteToy)
-router.put('/:id', updateToy)
+router.post('/',requireAuth, requireAdmin, addToy)
+router.delete('/:id',requireAuth, requireAdmin, deleteToy)
+router.put('/:id',requireAuth, requireAdmin, updateToy)
 
 module.exports = router

@@ -98,9 +98,11 @@ function _buildCriteria(filterBy) {
         criteria.type = typeCriteria
     }
     if (filterBy.inStock) {
-        filterBy.inStock = (filterBy.inStock === 'false')
-        const inStockCriteria = { $ne: filterBy.inStock }
-        criteria.inStock = inStockCriteria
+        criteria.inStock = filterBy.inStock
+    // if (filterBy.inStock) {
+    //     filterBy.inStock = (filterBy.inStock === 'false')
+    //     const inStockCriteria = { $ne: filterBy.inStock }
+    //     criteria.inStock = inStockCriteria
     }
     console.log('criteria', criteria)
     return criteria

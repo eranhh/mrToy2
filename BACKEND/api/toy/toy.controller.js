@@ -3,13 +3,15 @@ const userService = require('../user/user.service')
 const toyService = require('./toy.service')
 
 async function getToys(req, res) {
+    const { name, type, inStock } = req.query
+    const filterBy = {
+        name: name || '',
+        type: type || '',
+        inStock: inStock==='true',
+        // price: +price || 0
+    } 
+    console.log('filterBy', filterBy)
     try {
-        const filterBy = {
-            name:req.query?.name||'',
-            type: req.query?.type||'',
-            inStock: req.query?.inStock||''
-        }
-        console.log('filterBy', filterBy)
         // const toys = await toyService.query(req.query)
         const toys = await toyService.query(filterBy)
         res.send(toys)

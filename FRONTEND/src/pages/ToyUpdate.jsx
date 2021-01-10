@@ -30,6 +30,7 @@ class _ToyUpdate extends Component {
         let value
         value = (field === 'inStock') ? target.checked : target.value
         value = (field === 'price') ? +value : value
+        if (field === 'price' && value < 0) return
 
         this.setState(prevState => {
             return {
@@ -62,7 +63,7 @@ class _ToyUpdate extends Component {
                 <h3>{toy._id ? 'Update' : 'Add'} Toy</h3>
                 <form className="flex col j-between" onSubmit={this.onSaveToy}>
                     <TextField id="standard-secondary" label="Name" type="text" name="name" value={toy.name} placeholder="Name" color="secondary" onChange={this.handleInput} />
-                    <TextField label="Price" type="number" value={toy.price} onChange={this.handleInput} name="price" />
+                    <TextField label="Price" type="number" min="0" value={toy.price} onChange={this.handleInput} name="price" />
                     <select onChange={this.handleInput} name="type" value={toy.type}>
                         <option value="educational">Educational</option>
                         <option value="funny">Funny</option>
