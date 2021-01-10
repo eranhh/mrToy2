@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { Button, ButtonGroup, Chip, Avatar } from '@material-ui/core'
 
 function _AppHeader({ loggedInUser }) {
@@ -8,7 +8,7 @@ function _AppHeader({ loggedInUser }) {
 
     return <header>
         <section className="main-layout flex j-between a-center">
-            <h1><Link to="/">Kitty Toys</Link></h1>
+            <h1 className="logo"><NavLink exact to="/">😺 Kitty Toys</NavLink></h1>
             <div className="flex a-center">
                 {currUser ?
                     <Link to="/login" className="link">
