@@ -1,6 +1,9 @@
-import axios from 'axios'
+import Axios from 'axios';
 
 const URL = `http://localhost:3030/api/toy`
+const axios = Axios.create({
+    withCredentials: true
+})
 
 export const toyService = {
     query,
@@ -9,8 +12,8 @@ export const toyService = {
     removeToy
 }
 
-function query(filterBy  = {}) {
-    return axios.get(URL, {params: filterBy}).then(res => { return res.data })
+function query(filterBy = {}) {
+    return axios.get(URL, { params: filterBy }).then(res => { return res.data })
 }
 
 function getToyById(toyId) {

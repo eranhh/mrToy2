@@ -11,7 +11,8 @@ class _ToyUpdate extends Component {
             name: '',
             price: 0,
             inStock: true,
-            type: 'Educational'
+            type: 'Educational',
+            addedBy: this.props.loggedInUser.username
         }
     }
 
@@ -44,7 +45,6 @@ class _ToyUpdate extends Component {
     onSaveToy = (ev) => {
         ev.preventDefault()
         const { toy } = this.state
-        console.log("blablabla", toy);
         // if (!toy.name) return
         if (toy._id) {
             this.props.updateToy(toy).then(() => this.props.history.push('/toy'))
@@ -55,6 +55,8 @@ class _ToyUpdate extends Component {
     }
 
     render() {
+        console.log(this.props.loggedInUser)
+
         const { toy } = this.state
         if (!toy) return <div className="loader"></div>
         return (
@@ -81,7 +83,8 @@ class _ToyUpdate extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        toys: state.toyModule.toys
+        toys: state.toyModule.toys,
+        loggedInUser: state.userModule.loggedInUser
     }
 }
 

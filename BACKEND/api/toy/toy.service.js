@@ -1,5 +1,6 @@
 const dbService = require('../../services/db.service')
 const ObjectId = require('mongodb').ObjectId
+const logger = require('../../services/logger.service')
 const asyncLocalStorage = require('../../services/als.service')
 
 async function query(filterBy = {}) {
@@ -23,12 +24,22 @@ async function query(filterBy = {}) {
     }
 }
 
-async function remove(toyId) {
-    console.log('toy is:', toyId)
-    // logger.info('toy is:', toyId)
+async function getById(toyId) {
     try {
-        // console.log('toy is:', toyId)
-        // logger.info('toy is:', toyId)
+        const collection = await dbService.getCollection('toy')
+        var toy = await collection.find({ '_id': ObjectId(toyId) }).toArray()
+        return toy
+        // })
+        // return toy
+    } catch (err) {
+        logger.error('cannot find toy by id', err)
+        throw err
+    }
+}
+
+async function remove(toyId) {
+    console.log('ID OF TOY TO REMOVE:', toyId)
+    try {
         const collection = await dbService.getCollection('toy')
         await collection.deleteOne({ '_id': ObjectId(toyId) })
     } catch (err) {
@@ -38,10 +49,8 @@ async function remove(toyId) {
 }
 
 async function update(toy) {
-    console.log('toy is:', toy)
-    console.log(ObjectId(toy._id))
+    console.log('TOY TO UPDATE:', toy)
     try {
-        // console.log('toy is:', toy)
         // peek only updatable fields!
         const toyToSave = {
             _id: ObjectId(toy._id),
@@ -49,6 +58,7 @@ async function update(toy) {
             type: toy.type,
             price: toy.price,
             inStock: toy.inStock,
+            addedBy: toy.addedBy,
             createdAt: toy.createdAt
         }
         const collection = await dbService.getCollection('toy')
@@ -61,17 +71,15 @@ async function update(toy) {
 }
 
 async function add(toy) {
-    console.log('toy is:', toy)
-    // logger.info('toy is:', toy)
+    console.log('TOY TO ADD:', toy)
     try {
-        // console.log('toy is:', toy)
-        // logger.info('toy is:', toy)
         // peek only updatable fields!
         const toyToAdd = {
             name: toy.name,
             type: toy.type,
             price: toy.price,
             inStock: toy.inStock,
+            addedBy: toy.addedBy,
             createdAt: Date.now()
         }
         const collection = await dbService.getCollection('toy')
@@ -102,7 +110,7 @@ function _buildCriteria(filterBy) {
         const inStockCriteria = { $ne: filterBy.inStock }
         criteria.inStock = inStockCriteria
     }
-    console.log('criteria', criteria)
+    console.log('criteria', criteria)
     return criteria
 }
 
@@ -110,5 +118,6 @@ module.exports = {
     query,
     remove,
     add,
-    update
+    update,
+    getById
 }

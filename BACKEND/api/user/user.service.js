@@ -66,6 +66,7 @@ async function remove(userId) {
     try {
         const collection = await dbService.getCollection('user')
         await collection.deleteOne({ '_id': ObjectId(userId) })
+        console.log('USER REMOVED:', userId)
     } catch (err) {
         logger.error(`cannot remove user ${userId}`, err)
         throw err
@@ -84,6 +85,7 @@ async function update(user) {
         }
         const collection = await dbService.getCollection('user')
         await collection.updateOne({ '_id': userToSave._id }, { $set: userToSave })
+        console.log('USER UPDATED:', user)
         return userToSave;
     } catch (err) {
         logger.error(`cannot update user ${user._id}`, err)
@@ -103,6 +105,7 @@ async function add(user) {
         }
         const collection = await dbService.getCollection('user')
         await collection.insertOne(userToAdd)
+        console.log('USER ADDED:', user)
         return userToAdd
     } catch (err) {
         logger.error('cannot insert user', err)
