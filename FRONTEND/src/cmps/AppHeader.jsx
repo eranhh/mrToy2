@@ -8,7 +8,7 @@ function _AppHeader({ loggedInUser }) {
 
     return <header>
         <section className="main-layout flex j-between a-center">
-            <h1><Link to="/">Kitty Toys</Link></h1>
+            <h1><Link to="/" className="logo">😺 Kitty Toys</Link></h1>
             <div className="flex a-center">
                 {currUser ?
                     <Link to="/login" className="link">
