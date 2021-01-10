@@ -1,14 +1,21 @@
 import { Component } from 'react'
-import { userService } from '../services/userService.js'
 import { TextField } from '@material-ui/core'
 import { Button } from '@material-ui/core'
+import { connect } from 'react-redux'
 
-export class LoginSignup extends Component {
+import {
+  loadUsers,
+  removeUser,
+  login,
+  logout,
+  signup
+} from '../store/actions/userActions'
+
+class _LoginSignup extends Component {
 
   state = {
     currPage: 'login',
     msg: '',
-    loggedinUser: userService.getLoggedinUser(),
     loginCred: {
       username: '',
       password: ''
@@ -21,6 +28,8 @@ export class LoginSignup extends Component {
       email: ''
     }
   }
+
+  componentDidMount() { this.props.loadUsers() }
 
   loginHandleChange = ev => {
     const { name, value } = ev.target
@@ -49,46 +58,28 @@ export class LoginSignup extends Component {
       return this.setState({ msg: 'Please enter user/password' })
     }
     const userCreds = { username, password }
-
     try {
-      const user = await userService.login(userCreds)
-      this.setState(
-        {
-          loginCred: { username: '', password: '' },
-          loggedInUser: user
-        })
-    }
-    catch (err) {
-      console.log('ERR', err)
-      this.setState({ msg: 'Try again' })
+      this.props.login(userCreds)
+      this.setState({ loginCred: { username: '', password: '' } })
+    } catch (err) {
+      this.setState({ msg: 'Login failed, try again.' })
     }
   }
 
   doSignup = async ev => {
     ev.preventDefault()
-    try {
-      const { username, password, firstName, lastName, email } = this.state.signupCred
-      if (!username || !password || !firstName || !lastName || !email) return this.setState({ msg: 'All inputs are required' })
-
-      const user = await userService.signup({ username, password, firstName, lastName, email })
-      this.setState(
-        {
-          signupCred: { username: '', password: '', firstName: '', lastName: '', email: '' },
-          loggedInUser: user
-        })
+    const { username, password, firstName, lastName, email } = this.state.signupCred
+    if (!username || !password || !firstName || !lastName || !email) {
+      return this.setState({ msg: 'All inputs are required' })
     }
-    catch (err) { console.log('Had an error:', err) }
-  }
-
-  doLogout = () => {
-    userService.logout()
-      .then(() => {
-        this.setState({ loggedInUser: null })
-      })
+    const signupCreds = { username, password, firstName, lastName, email }
+    this.props.signup(signupCreds)
+    this.setState({ signupCred: { username: '', password: '', firstName: '', lastName: '', email: '' } })
   }
 
   render() {
-    const loggedInUser = userService.getLoggedinUser()
+    const { loggedInUser } = this.props
+    console.log(this.props)
 
     let signupSection = (
       <form className="frm-signup flex col" onSubmit={this.doSignup}>
@@ -160,7 +151,7 @@ export class LoginSignup extends Component {
           <div>
             <h3>
               Welcome {loggedInUser.firstName + ' ' + loggedInUser.lastName}
-              <Button color="secondary" onClick={this.doLogout}>LOGOUT</Button>
+              <Button color="secondary" onClick={this.props.logout}>LOGOUT</Button>
             </h3>
           </div>
         )
@@ -176,3 +167,19 @@ export class LoginSignup extends Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    users: state.userModule.users,
+    loggedInUser: state.userModule.loggedInUser,
+  }
+}
+const mapDispatchToProps = {
+  login,
+  logout,
+  signup,
+  removeUser,
+  loadUsers
+}
+
+export const LoginSignup = connect(mapStateToProps, mapDispatchToProps)(_LoginSignup)

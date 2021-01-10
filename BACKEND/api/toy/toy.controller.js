@@ -1,6 +1,6 @@
 const logger = require('../../services/logger.service')
-const userService = require('../user/user.service')
 const toyService = require('./toy.service')
+// const userService = require('../user/user.service')
 
 async function getToys(req, res) {
     const { name, type, inStock } = req.query
@@ -23,7 +23,7 @@ async function getToys(req, res) {
 
 async function deleteToy(req, res) {
     try {
-        await toyService.remove(req.params.id)
+        await toyService.remove(toyId)
         res.send({ msg: 'Deleted successfully' })
     } catch (err) {
         logger.error('Failed to delete toy', err)
@@ -31,14 +31,12 @@ async function deleteToy(req, res) {
     }
 }
 
-
 async function updateToy(req, res) {
     try {
         const toy = req.body
-        console.log('toy', toy)
         const savedToy = await toyService.update(toy)
         res.send(savedToy)
-        console.log('savedtoy', savedToy)
+        console.log('savedtoy', savedToy)
     } catch (err) {
         logger.error('Failed to update toy', err)
         res.status(500).send({ err: 'Failed to update toy' })
@@ -48,7 +46,6 @@ async function updateToy(req, res) {
 async function addToy(req, res) {
     try {
         var toy = req.body
-        console.log('toy IS:', toy)
         // toy.byUserId = req.session.user._id
         toy = await toyService.add(toy)
         // toy.byUser = req.session.user

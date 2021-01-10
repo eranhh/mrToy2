@@ -21,6 +21,7 @@ export function addToy(toy) {
                     type: 'ADD_TOY',
                     toy: savedToy
                 }
+                console.log(savedToy)
                 dispatch(action)
             })
     }

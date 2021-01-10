@@ -1,16 +1,14 @@
 // *{
-//   text-align: center;  
+//   text-align: center;
 // }
 
 .add-btn {
     background-color: rgb(206, 240, 237);
     border-radius: 5px;
     padding: 10px;
-    margin-left: 40%;
-    margin-right: 40%;
-    text-align: center;
+    display: block;
+    margin: auto;
     font-weight: bold;
     width: 180px;
     text-align: center;
 }
-

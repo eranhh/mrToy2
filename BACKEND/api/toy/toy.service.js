@@ -1,6 +1,7 @@
 const dbService = require('../../services/db.service')
 const ObjectId = require('mongodb').ObjectId
 const asyncLocalStorage = require('../../services/als.service')
+const logger = require('../../services/logger.service')
 
 async function query(filterBy = {}) {
     // const criteria = {}
