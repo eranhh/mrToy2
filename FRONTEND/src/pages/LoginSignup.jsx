@@ -60,6 +60,7 @@ class _LoginSignup extends Component {
     const userCreds = { username, password }
     try {
       this.props.login(userCreds)
+      .then(() => this.props.history.push('/toy'))
       this.setState({ loginCred: { username: '', password: '' } })
     } catch (err) {
       this.setState({ msg: 'Login failed, try again.' })
@@ -74,6 +75,7 @@ class _LoginSignup extends Component {
     }
     const signupCreds = { username, password, firstName, lastName, email }
     this.props.signup(signupCreds)
+    .then(() => this.props.history.push('/toy'))
     this.setState({ signupCred: { username: '', password: '', firstName: '', lastName: '', email: '' } })
   }
 
