@@ -1,0 +1,38 @@
+.toy-reviews {
+    margin-top: 100px;
+    // padding: 50px;
+    // text-align: center;
+    h4 {
+        // padding-bottom: 20px;
+    }
+
+    form {
+        padding-inline-start: 100px;
+        width: 550px;
+    }
+
+    textarea {
+        height: 80px;
+        width: 100%;
+        resize: none;
+    }
+
+    table {
+        padding: 35px 100px;
+        width: 100%;
+    }
+
+    table * {
+        padding: 25px;
+        // text-align: center;
+        // font-family: monospace;
+    }
+
+    thead {
+        background-color: lightgray;
+    }
+
+    tr:nth-child(even) {
+        background-color: #efefef;
+    }
+}

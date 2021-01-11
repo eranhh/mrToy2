@@ -81,7 +81,6 @@ async function update(user) {
             username: user.username,
             firstName: user.fisrtName,
             lastName: user.lastName,
-            score: user.score
         }
         const collection = await dbService.getCollection('user')
         await collection.updateOne({ '_id': userToSave._id }, { $set: userToSave })

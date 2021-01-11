@@ -33,7 +33,7 @@ export class _ToyFilter extends Component {
         return (
             <section className="toy-filter">
                 <form className="filter-form" onSubmit={this.onFilter}>
-                    <span style={{fontWeight: "bold"}}>Filter:</span> <label htmlFor="">Name</label>
+                    <span style={{ fontWeight: "bold" }}>Filter:</span> <label htmlFor="">Name</label>
                     <input type="text" name='name' value={name} onChange={this.handleChange} />
                     <label htmlFor="">Type</label>
                     <select onChange={this.handleChange} name="type" value={type}>

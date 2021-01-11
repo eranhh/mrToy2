@@ -17,7 +17,7 @@ function _AppHeader({ loggedInUser }) {
                             label={fullName}
                             color="primary" />
                     </Link>
-                    : <Link to="/signup" className="link">
+                    : <Link to="/login" className="link">
                         <Chip
                             avatar={<Avatar></Avatar>}
                             label="Login"

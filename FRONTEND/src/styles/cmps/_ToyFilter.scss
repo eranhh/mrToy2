@@ -3,4 +3,8 @@
     width: fit-content;
     display: block;
     margin: auto;
+
+    * {
+        margin-inline-end: 10px;
+    }
 }

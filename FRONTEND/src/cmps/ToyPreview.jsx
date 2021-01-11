@@ -9,11 +9,11 @@ function _ToyPreview({ loggedInUser, toy, onRemove }) {
             {(loggedInUser && loggedInUser.isAdmin) && <Button color='secondary' onClick={() => onRemove(toy._id)}>X</Button>}
             {/* <Button color='secondary' onClick={() => onRemove(toy._id)}>X</Button> */}
         </div>
-        <h4 className="lem-chif">${toy.price}</h4>
+        <h3>${toy.price}</h3>
         <p>Category: {toy.type}</p>
         <img src={`https://robohash.org/${toy.name}?set=set4`} alt="" />
         <Button className="details-btn">
-            <Link to={`/toy/${toy._id}`} className="lem-chif">Details</Link>
+            <Link to={`/toy/${toy._id}`} style={{color:'#CC0000'}}>Details</Link>
         </Button>
     </article>
 }

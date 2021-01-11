@@ -26,6 +26,7 @@ function remove(reviewId) {
 
 }
 async function add(review) {
+  console.log('reviewService:', review)
   const addedReview = await httpService.post(`review`, review)
 
   // review.byUser = userService.getLoggedinUser()

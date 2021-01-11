@@ -1,5 +1,4 @@
 import { reviewService } from '../../services/reviewService'
-import { userService } from '../../services/userService'
 
 
 export function loadReviews() {
@@ -7,7 +6,6 @@ export function loadReviews() {
     try {
       const reviews = await reviewService.query()
       dispatch({ type: 'SET_REVIEWS', reviews })
-
     } catch (err) {
       console.log('ReviewActions: err in loadReviews', err)
     }
@@ -19,10 +17,6 @@ export function addReview(review) {
     try {
       const addedReview = await reviewService.add(review)
       dispatch({ type: 'ADD_REVIEW', review: addedReview })
-
-      const score = await userService.increaseScore()
-      dispatch({ type: 'SET_SCORE', score })
-      
     } catch (err) {
       console.log('ReviewActions: err in addReview', err)
     }

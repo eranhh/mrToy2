@@ -1,5 +1,5 @@
 .login-signup {
-    width: 400px;
+    width: 350px;
     margin: auto;
     margin-top: 75px;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -10,21 +10,26 @@
         padding: 5px;
     }
 
+    .lock-icon-div {
+        margin-top: 20px;
+    }
+
     form {
         // width: 80%;
         // margin: auto;
-        padding: 25px 20%;
+        padding: 25px 15%;
         h2 {
             text-align: center;
             margin-bottom: 25px;
         }
         .MuiInput-root {
-            font-size: 0.8em;
+            font-size: 0.9em;
         }
         .MuiInput-root:last-of-type {
             margin-bottom: 15px;
         }
-        &.frm-signup {
+        .filler-logos {
+            margin-top: 50px;
         }
     }
 

@@ -70,6 +70,7 @@ async function remove(reviewId) {
 
 
 async function add(review) {
+    console.log('review.service:', review)
     try {
         // peek only updatable fields!
         const reviewToAdd = {

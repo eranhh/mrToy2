@@ -2,6 +2,12 @@ import { Component } from 'react'
 import { TextField } from '@material-ui/core'
 import { Button } from '@material-ui/core'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import FaceIcon from '@material-ui/icons/Face';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import SecurityIcon from '@material-ui/icons/Security'
+import VpnKeyIcon from '@material-ui/icons/VpnKey'
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 
 import {
   loadUsers,
@@ -14,7 +20,7 @@ import {
 class _LoginSignup extends Component {
 
   state = {
-    currPage: 'login',
+    currPage: '/login',
     msg: '',
     loginCred: {
       username: '',
@@ -29,7 +35,10 @@ class _LoginSignup extends Component {
     }
   }
 
-  componentDidMount() { this.props.loadUsers() }
+  componentDidMount() {
+    this.props.loadUsers()
+    this.setState({ currPage: this.props.match.path })
+  }
 
   loginHandleChange = ev => {
     const { name, value } = ev.target
@@ -59,11 +68,11 @@ class _LoginSignup extends Component {
     }
     const userCreds = { username, password }
     try {
-      this.props.login(userCreds)
-      .then(() => this.props.history.push('/toy'))
+      await this.props.login(userCreds)
       this.setState({ loginCred: { username: '', password: '' } })
+      if (sessionStorage['loggedinUser']) this.props.history.push('/toy')
     } catch (err) {
-      this.setState({ msg: 'Login failed, try again.' })
+      return await this.setState({ msg: 'Login failed, try again.' })
     }
   }
 
@@ -74,14 +83,13 @@ class _LoginSignup extends Component {
       return this.setState({ msg: 'All inputs are required' })
     }
     const signupCreds = { username, password, firstName, lastName, email }
-    this.props.signup(signupCreds)
-    .then(() => this.props.history.push('/toy'))
+    await this.props.signup(signupCreds)
     this.setState({ signupCred: { username: '', password: '', firstName: '', lastName: '', email: '' } })
+    if (sessionStorage['loggedinUser']) this.props.history.push('/toy')
   }
 
   render() {
     const { loggedInUser } = this.props
-    console.log(this.props)
 
     let signupSection = (
       <form className="frm-signup flex col" onSubmit={this.doSignup}>
@@ -142,6 +150,13 @@ class _LoginSignup extends Component {
           label="Password"
         />
         <Button className="login-btn" type="submit" color="primary" variant="contained">SIGN IN</Button>
+
+        <div className="filler-logos flex j-between">
+          <SecurityIcon></SecurityIcon>
+          <VpnKeyIcon></VpnKeyIcon>
+          <LockOutlinedIcon></LockOutlinedIcon>
+          <VerifiedUserIcon></VerifiedUserIcon>
+        </div>
       </form>
     )
 
@@ -159,12 +174,13 @@ class _LoginSignup extends Component {
         )
         }
         <div className="btn-group flex">
-          <Button color="primary" onClick={() => this.setState({ currPage: 'login' })}>Login</Button>
-          <Button color="secondary" onClick={() => this.setState({ currPage: 'signup' })}>Signup</Button>
+          <Button color="primary"><Link to='/login'>Login</Link></Button>
+          <Button color="secondary"><Link to='/signup'>Signup</Link></Button>
         </div>
         <p className="muted red">{msg ? '* ' + msg : ''}</p>
-        {(!loggedInUser && currPage === 'login') && loginSection}
-        {(!loggedInUser && currPage === 'signup') && signupSection}
+        <div className="lock-icon-div flex j-center"><FaceIcon fontSize="large" color={currPage === '/login' ? "primary" : "secondary"}></FaceIcon></div>
+        {(!loggedInUser && currPage === '/login') && loginSection}
+        {(!loggedInUser && currPage === '/signup') && signupSection}
       </div >
     )
   }

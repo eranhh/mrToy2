@@ -1,4 +1,16 @@
-/* FLEX & GRID */
+// DISPLAY
+
+.d-block {
+    display: block;
+}
+
+.d-inline {
+    display: inline;
+}
+
+.d-inblock {
+    display: block;
+}
 
 .flex {
     display: flex;
@@ -107,6 +119,7 @@
 }
 
 // COLORS
+
 .red {
     color: #d90007;
 }
@@ -136,7 +149,7 @@
 }
 
 .muted {
-    font-size: 0.7em;
+    font-size: 0.8em;
     opacity: 0.5;
 }
 
