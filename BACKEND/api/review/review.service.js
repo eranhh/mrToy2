@@ -78,8 +78,8 @@ async function add(review) {
             txt: review.txt
         }
         const collection = await dbService.getCollection('review')
-        const res = await collection.insertOne(reviewToAdd)
-        return res.ops[0];
+        await collection.insertOne(reviewToAdd)
+        return reviewToAdd;
     } catch (err) {
         logger.error('cannot insert review', err)
         throw err
