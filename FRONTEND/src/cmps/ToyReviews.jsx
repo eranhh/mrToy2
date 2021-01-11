@@ -1,42 +1,53 @@
-import { Component, Fragment } from 'react'
+import {createRef} from 'react'
 import { connect } from 'react-redux'
-import { loadReviews, addReview, removeReview } from '../store/actions/reviewActions.js'
+import { addReview, removeReview } from '../store/actions/reviewActions.js'
 import { Button } from '@material-ui/core'
 
-class _ToyReviews extends Component {
+const textareaRef = createRef()
 
-    render() {
-        console.log(this.props)
-        const { toy } = this.props
+function getToyReviews(toy, reviews) {
 
-        return <section className="toy-reviews main-layout">
-            <form onSubmit={this.props.addReview}>
-                <div className="flex j-between a-center">
-                    <h4>Add a review</h4>
-                    <Button>POST</Button>
-                </div>
-                <textarea></textarea>
-            </form>
+    return reviews.filter(review => {
+        return review.aboutToy === toy._id
+    })
+}
 
-            {console.log(toy.reviews)}
-            {(toy.reviews && toy.reviews.length) && <table cellpadding="0" cellspacing="0">
-                <thead>
+function onAddReview(ev, addReview) {
+    ev.preventDefault()
+    addReview(textareaRef.current.value)
+}
+
+function _ToyReviews({ toy, reviews, addReview, removeReview }) {
+    const toyReviews = getToyReviews(toy, reviews)
+
+    return <section className="toy-reviews main-layout">
+        <form onSubmit={(ev) => onAddReview(ev, addReview)}>
+            <div className="flex j-between a-center">
+                <h4>Add a review</h4>
+                <Button type="submit">POST</Button>
+            </div>
+            <textarea ref={textareaRef}></textarea>
+        </form>
+
+        {(toyReviews && toyReviews.length) && <table cellPadding="0" cellSpacing="0">
+            <thead>
+                <tr>
                     <th>By</th>
                     <th>Review</th>
                     <th>Posted At</th>
-                </thead>
-                <tbody>
-                    {toy.reviews.map(review => {
-                        <Fragment>
-                            <tr>{review.by}</tr>
-                            <tr>{review.txt}</tr>
-                            <tr>{review.createdAt}</tr>
-                        </Fragment>
-                    })}
-                </tbody>
-            </table>}
-        </section>
-    }
+                </tr>
+            </thead>
+            <tbody>
+                {toyReviews.map(review => {
+                    return <tr>
+                        <td><h4>{review.by}</h4></td>
+                        <td><h4>{review.txt}</h4></td>
+                        <td><h4>{review.createdAt}</h4></td>
+                    </tr>
+                })}
+            </tbody>
+        </table>}
+    </section>
 }
 
 const mapStateToProps = (state) => {
@@ -46,9 +57,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    loadReviews,
     addReview,
-    removeReview,
+    removeReview
 }
 
 export const ToyReviews = connect(mapStateToProps, mapDispatchToProps)(_ToyReviews)

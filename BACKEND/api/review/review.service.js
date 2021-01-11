@@ -6,43 +6,46 @@ async function query(filterBy = {}) {
     try {
         // const criteria = _buildCriteria(filterBy)
         const collection = await dbService.getCollection('review')
-        // const reviews = await collection.find(criteria).toArray()
-        var reviews = await collection.aggregate([
-            {
-                $match: filterBy
-            },
-            {
-                $lookup:
-                {
-                    from: 'user',
-                    localField: 'byUserId',
-                    foreignField: '_id',
-                    as: 'byUser'
-                }
-            },
-            {
-                $unwind: '$byUser'
-            },
-            {
-                $lookup:
-                {
-                    from: 'user',
-                    localField: 'aboutUserId',
-                    foreignField: '_id',
-                    as: 'aboutUser'
-                }
-            },
-            {
-                $unwind: '$aboutUser'
-            }
-        ]).toArray()
-        reviews = reviews.map(review => {
-            review.byUser = { _id: review.byUser._id, fullname: review.byUser.fullname }
-            review.aboutUser = { _id: review.aboutUser._id, fullname: review.aboutUser.fullname }
-            delete review.byUserId
-            delete review.aboutUserId
-            return review
-        })
+        const reviews = await collection.find({}).toArray()
+
+        // var reviews = await collection.aggregate([
+        //     {
+        //         $match: filterBy
+        //     },
+        //     {
+        //         $lookup:
+        //         {
+        //             from: 'user',
+        //             localField: 'byUserId',
+        //             foreignField: '_id',
+        //             as: 'byUser'
+        //         }
+        //     },
+        //     {
+        //         $unwind: '$byUser'
+        //     },
+        //     {
+        //         $lookup:
+        //         {
+        //             from: 'user',
+        //             localField: 'aboutUserId',
+        //             foreignField: '_id',
+        //             as: 'aboutUser'
+        //         }
+        //     },
+        //     {
+        //         $unwind: '$aboutUser'
+        //     }
+        // ]).toArray()
+
+
+        // reviews = reviews.map(review => {
+        //     review.byUser = { _id: review.byUser._id, fullname: review.byUser.fullname }
+        //     review.aboutUser = { _id: review.aboutUser._id, fullname: review.aboutUser.fullname }
+        //     delete review.byUserId
+        //     delete review.aboutUserId
+        //     return review
+        // })
 
         return reviews
     } catch (err) {
@@ -70,7 +73,8 @@ async function remove(reviewId) {
 
 
 async function add(review) {
-    console.log('review.service:', review)
+    console.log('review.service_ADD:',review)
+
     try {
         // peek only updatable fields!
         const reviewToAdd = {

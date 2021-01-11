@@ -24,8 +24,10 @@ async function deleteReview(req, res) {
 
 
 async function addReview(req, res) {
-    console.log('review.controller:', req.body)
-    
+    ////// THE PROBLEM IS HERE --->
+    ///// not getting the review in 'req'
+    console.log('review.controller_ADD:')
+
     try {
         var review = req.body
         review.byUserId = req.session.user._id

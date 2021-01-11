@@ -7,7 +7,7 @@ export function reviewReducer(state = initialState, action = {}) {
     case 'SET_REVIEWS':
       return { ...state, reviews: action.reviews }
     case 'ADD_REVIEW':
-      console.log(state,action)
+      console.log('reviewReducer:', state, action)
       return { ...state, reviews: [...state.reviews, action.review] }
     case 'REMOVE_REVIEW':
       return { ...state, reviews: state.reviews.filter(review => review._id !== action.reviewId) }

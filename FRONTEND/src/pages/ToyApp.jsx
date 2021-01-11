@@ -1,7 +1,8 @@
 import { Component } from 'react'
 import { ToyList } from '../cmps/ToyList.jsx'
 import { ToyFilter } from '../cmps/ToyFilter.jsx'
-import { loadToys, addToy, removeToy } from '../store/actions/toyActions.js'
+import { loadToys } from '../store/actions/toyActions.js'
+import { loadReviews } from '../store/actions/reviewActions.js'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -13,6 +14,7 @@ class _ToyApp extends Component {
 
     componentDidMount() {
         this.props.loadToys()
+        this.props.loadReviews()
     }
 
     onSetFilter = (filterBy) => {
@@ -47,13 +49,13 @@ class _ToyApp extends Component {
     // }
 
     render() {
-        const { toys, loggedInUser, removeToy } = this.props
+        const { loggedInUser } = this.props
         // const toys = this.toysForDisplay
         return <section className="toy-app">
             <section>
                 <ToyFilter onSetFilter={this.onSetFilter} />
                 {(loggedInUser && loggedInUser.isAdmin) && <Link className="add-btn" to="/toy/update">Add Toy</Link>}
-                <ToyList toys={toys} onRemove={removeToy} />
+                <ToyList />
             </section>
         </section>
     }
@@ -61,7 +63,6 @@ class _ToyApp extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        toys: state.toyModule.toys,
         filterBy: state.toyModule.filterBy,
         loggedInUser: state.userModule.loggedInUser
     }
@@ -69,8 +70,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     loadToys,
-    addToy,
-    removeToy,
+    loadReviews
 }
 
 export const ToyApp = connect(mapStateToProps, mapDispatchToProps)(_ToyApp)
